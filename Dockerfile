@@ -4,7 +4,7 @@ RUN export user=coder \
   && groupadd -g 1000 -r $user && useradd -m -r -g 1000 -u 1000 $user
 
 RUN apt-get update -q \
-  && apt-get install -qy --no-install-recommends \
+  && apt-get install -qy \
     ca-certificates \
     dumb-init \
     git \
@@ -19,6 +19,7 @@ RUN apt-get update -q \
     libgtk-3-dev \
     build-essential \
     curl \
+    gettext \
   && echo "deb http://ppa.launchpad.net/prince781/vala-language-server/ubuntu bionic main" > /etc/apt/sources.list.d/vala.list \
   && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys B13D6EF696260D322CC0980F3C7C9C4B21A1F479 \
   && apt-get update -q \
