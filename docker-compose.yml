@@ -1,0 +1,15 @@
+---
+version: "3"
+services:
+  code-server:
+    image: code-server
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - $HOME/Projects:/home/coder/project
+    command:
+      - --disable-telemetry
+      - --auth=none
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:8080"
