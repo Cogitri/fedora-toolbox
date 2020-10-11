@@ -20,11 +20,30 @@ RUN apt-get update -q \
     build-essential \
     curl \
     gettext \
+    libgirepository1.0-dev \
+    libsecret-1-dev \
   && echo "deb http://ppa.launchpad.net/prince781/vala-language-server/ubuntu bionic main" > /etc/apt/sources.list.d/vala.list \
   && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys B13D6EF696260D322CC0980F3C7C9C4B21A1F479 \
   && apt-get update -q \
   && apt-get install -y vala-language-server \
   && rm -rf /var/lib/apt/lists/*
+
+RUN wget https://download.gnome.org/sources/libhandy/1.0/libhandy-1.0.0.tar.xz \
+  && tar xf libhandy-1.0.0.tar.xz \
+  && cd libhandy-1.0.0 \
+  && meson \
+    --prefix=/usr \
+    -Dprofiling=false \
+    -Dintrospection=enabled \
+    -Dgtk_doc=false \
+    -Dtests=false \
+    -Dexamples=false \
+    -Dvapi=true \
+    -Dglade_catalog=disabled \
+    build \
+  && ninja -C build install \
+  && cd .. \
+  && rm -r libhandy-1.0.0*
 
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 
@@ -39,8 +58,10 @@ RUN \
   ln -s /usr/lib/code-server/lib/vscode/node_modules /usr/lib/code-server/lib/vscode/node_modules.asar
 
 USER coder
+COPY prince781.vala-1.0.3.vsix /prince781.vala-1.0.3.vsix
 RUN mkdir -p /home/coder/project \
-  && mkdir -p /home/coder/.local/share/code-server
+  && mkdir -p /home/coder/.local/share/code-server \
+  && code-server --install-extension prince781.vala-1.0.3.vsix
 
 EXPOSE 8080
 ENV NODE_ENV=production
