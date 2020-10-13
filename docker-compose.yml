@@ -1,15 +1,28 @@
 ---
-version: "3"
+version: "3.5"
 services:
   code-server:
-    image: cogitri/code-server-dev-container
+    image: cogitri/code-server-dev-container:latest
     security_opt:
       - seccomp:unconfined
     volumes:
-      - $HOME/Projects:/home/coder/project
-    command:
-      - --disable-telemetry
-      - --auth=none
+      - type: volume
+        source: homedata
+        target: /home/coder
+        volume:
+          nocopy: false
+      - type: volume
+        source: sshdata
+        target: /etc/ssh
+        volume:
+          nocopy: false
+      - type: bind
+        source: $HOME/Projects
+        target: /home/coder/project
     restart: unless-stopped
     ports:
-      - "127.0.0.1:8080:8080"
+      - "127.0.0.1:2222:22"
+
+volumes:
+  homedata:
+  sshdata:
