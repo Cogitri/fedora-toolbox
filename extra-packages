@@ -55,3 +55,5 @@ bear
 make
 clang
 clang-tools-extra
+fish
+vim
