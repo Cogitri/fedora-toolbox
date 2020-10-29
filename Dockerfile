@@ -38,4 +38,4 @@ RUN git clone https://gitlab.gnome.org/exalm/libhandy -b gtk4 \
 
 RUN dnf clean all
 
-CMD /bin/sh
+CMD /usr/bin/fish
