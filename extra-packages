@@ -57,3 +57,7 @@ clang
 clang-tools-extra
 fish
 vim
+openssh-server
+android-tools
+go
+valadoc

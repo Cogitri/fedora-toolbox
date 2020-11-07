@@ -22,6 +22,11 @@ COPY extra-packages /
 RUN dnf -y install $(<extra-packages)
 RUN rm /extra-packages
 
+RUN printf "Port 2222\nListenAddress localhost\nPermitEmptyPasswords yes\n" >> /etc/ssh/sshd_config \
+	&& /usr/libexec/openssh/sshd-keygen rsa \
+	&& /usr/libexec/openssh/sshd-keygen ecdsa \
+	&& /usr/libexec/openssh/sshd-keygen ed25519
+
 RUN git clone https://github.com/benwaffle/vala-language-server \
 	&& cd vala-language-server \
 	&& meson build \
