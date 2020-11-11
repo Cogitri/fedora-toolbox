@@ -61,3 +61,10 @@ openssh-server
 android-tools
 go
 valadoc
+tracker3-devel
+openssl-devel
+lm_sensors
+polkit-devel
+dbus-devel
+asciidoc
+gtk-doc
