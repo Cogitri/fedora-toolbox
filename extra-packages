@@ -68,3 +68,6 @@ polkit-devel
 dbus-devel
 asciidoc
 gtk-doc
+valgrind
+gdb
+nano
