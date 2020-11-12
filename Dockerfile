@@ -15,7 +15,7 @@ COPY README.md /
 RUN sed -i '/tsflags=nodocs/d' /etc/dnf/dnf.conf
 
 COPY missing-docs /
-RUN dnf -y reinstall $(<missing-docs)
+RUN dnf -y reinstall $(<missing-docs) && dnf upgrade -y
 RUN rm /missing-docs
 
 COPY extra-packages /
@@ -40,6 +40,16 @@ RUN git clone https://gitlab.gnome.org/exalm/libhandy -b gtk4 \
 	&& ninja -C build install \
 	&& cd .. \
 	&& rm -r libhandy
+
+RUN git clone https://github.com/vala-lang/vala-lint \
+	&& cd vala-lint \
+	&& meson build \
+	&& ninja -C build install \
+	&& cd .. \
+	&& rm -r vala-lint
+
+RUN echo "/usr/local/lib64" > /etc/ld.so.conf.d/custom.conf \
+	&& ldconfig
 
 RUN dnf clean all
 
