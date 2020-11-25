@@ -73,3 +73,6 @@ gdb
 nano
 youtube-dl
 ffmpeg
+texlive-scheme-medium
+texlive-chktex
+texlive-latexindent
