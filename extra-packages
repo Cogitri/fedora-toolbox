@@ -76,3 +76,6 @@ ffmpeg
 texlive-scheme-medium
 texlive-chktex
 texlive-latexindent
+libssh2-devel
+http-parser
+cmake

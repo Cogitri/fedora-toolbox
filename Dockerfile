@@ -34,21 +34,37 @@ RUN git clone https://github.com/benwaffle/vala-language-server \
 	&& meson build \
 	&& ninja -C build install \
 	&& cd .. \
-	&& rm -r vala-language-server
+	&& rm -rf vala-language-server
 
 RUN git clone https://gitlab.gnome.org/exalm/libhandy -b gtk4 \
 	&& cd libhandy \
+	&& git checkout c425c1254e2f640ee28d746ac272e16bbc453b2b \
 	&& meson build \
 	&& ninja -C build install \
 	&& cd .. \
-	&& rm -r libhandy
+	&& rm -rf libhandy
 
 RUN git clone https://github.com/vala-lang/vala-lint \
 	&& cd vala-lint \
 	&& meson build \
 	&& ninja -C build install \
 	&& cd .. \
-	&& rm -r vala-lint
+	&& rm -rf vala-lint
+
+RUN wget https://github.com/libgit2/libgit2/releases/download/v1.1.0/libgit2-1.1.0.tar.gz \
+	&& tar xf libgit2-1.1.0.tar.gz \
+	&& cd libgit2-1.1.0 \
+	&& cmake -G Ninja -B build \
+	&& ninja -C build install \
+	&& cd .. \
+	&& rm -r libgit2*
+
+RUN git clone https://gitlab.alpinelinux.org/Leo/agl \
+	&& cd agl \
+	&& go build \
+	&& mv agl /usr/local/bin/ \
+	&& cd .. \
+	&& rm -rf agl
 
 RUN echo "/usr/local/lib64" > /etc/ld.so.conf.d/custom.conf \
 	&& ldconfig
