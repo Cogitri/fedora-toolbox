@@ -24,10 +24,21 @@ RUN dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-re
 	&& dnf -y install $(<extra-packages)
 RUN rm /extra-packages
 
+RUN sudo dnf builddep -y gtk4
+
 RUN printf "Port 2222\nListenAddress localhost\nPermitEmptyPasswords yes\n" >> /etc/ssh/sshd_config \
 	&& /usr/libexec/openssh/sshd-keygen rsa \
 	&& /usr/libexec/openssh/sshd-keygen ecdsa \
 	&& /usr/libexec/openssh/sshd-keygen ed25519
+
+RUN curl -L -O https://ftp.acc.umu.se/pub/GNOME/sources/gtk/4.0/gtk-4.0.0.tar.xz \
+	&& tar xf gtk-4.0.0.tar.xz \
+	&& cd gtk-4.0.0 \
+	&& meson build --prefix=/usr \
+	&& ninja  -C build install \
+	&& cd .. \
+	&& rm -rf gtk-4.0.0 \
+	&& sudo curl https://gitlab.gnome.org/GNOME/vala/-/raw/master/vapi/gtk4.vapi -o /usr/share/vala-0.48/vapi/gtk4.vapi
 
 RUN git clone https://github.com/benwaffle/vala-language-server \
 	&& cd vala-language-server \
@@ -38,7 +49,6 @@ RUN git clone https://github.com/benwaffle/vala-language-server \
 
 RUN git clone https://gitlab.gnome.org/exalm/libhandy -b gtk4 \
 	&& cd libhandy \
-	&& git checkout c425c1254e2f640ee28d746ac272e16bbc453b2b \
 	&& meson build \
 	&& ninja -C build install \
 	&& cd .. \
@@ -50,21 +60,6 @@ RUN git clone https://github.com/vala-lang/vala-lint \
 	&& ninja -C build install \
 	&& cd .. \
 	&& rm -rf vala-lint
-
-RUN wget https://github.com/libgit2/libgit2/releases/download/v1.1.0/libgit2-1.1.0.tar.gz \
-	&& tar xf libgit2-1.1.0.tar.gz \
-	&& cd libgit2-1.1.0 \
-	&& cmake -G Ninja -B build \
-	&& ninja -C build install \
-	&& cd .. \
-	&& rm -r libgit2*
-
-RUN git clone https://gitlab.alpinelinux.org/Leo/agl \
-	&& cd agl \
-	&& go build \
-	&& mv agl /usr/local/bin/ \
-	&& cd .. \
-	&& rm -rf agl
 
 RUN echo "/usr/local/lib64" > /etc/ld.so.conf.d/custom.conf \
 	&& ldconfig

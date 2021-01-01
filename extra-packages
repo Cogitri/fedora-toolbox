@@ -41,7 +41,6 @@ zip
 meson
 vala
 vala-devel
-gtk4-devel
 libgee-devel
 jsonrpc-glib-devel
 vulkan-headers
@@ -79,3 +78,6 @@ texlive-latexindent
 libssh2-devel
 http-parser
 cmake
+pandoc
+pwgen
+npm
