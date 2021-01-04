@@ -24,12 +24,9 @@ openssh-clients
 passwd
 pigz
 procps-ng
-rsync
 shadow-utils
 sudo
-tcpdump
 time
-traceroute
 tree
 unzip
 vte-profile
@@ -72,12 +69,5 @@ gdb
 nano
 youtube-dl
 ffmpeg
-texlive-scheme-medium
-texlive-chktex
-texlive-latexindent
-libssh2-devel
-http-parser
-cmake
-pandoc
 pwgen
 npm
