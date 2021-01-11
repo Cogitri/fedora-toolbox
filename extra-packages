@@ -71,3 +71,5 @@ youtube-dl
 ffmpeg
 pwgen
 npm
+mesa-dri-drivers
+fuse
