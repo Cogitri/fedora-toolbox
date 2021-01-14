@@ -13,13 +13,13 @@ RUN printf "Port 2222\nListenAddress localhost\nPermitEmptyPasswords yes\n" >> /
 	&& /usr/libexec/openssh/sshd-keygen ecdsa \
 	&& /usr/libexec/openssh/sshd-keygen ed25519
 
-RUN curl -L -O https://ftp.acc.umu.se/pub/GNOME/sources/gtk/4.0/gtk-4.0.0.tar.xz \
-	&& tar xf gtk-4.0.0.tar.xz \
-	&& cd gtk-4.0.0 \
+RUN curl -L -O https://ftp.acc.umu.se/pub/GNOME/sources/gtk/4.0/gtk-4.0.1.tar.xz \
+	&& tar xf gtk-4.0.1.tar.xz \
+	&& cd gtk-4.0.1 \
 	&& meson build --prefix=/usr \
 	&& ninja  -C build install \
 	&& cd .. \
-	&& rm -rf gtk-4.0.0 \
+	&& rm -rf gtk-4.0.1 \
 	&& sudo curl https://gitlab.gnome.org/GNOME/vala/-/raw/master/vapi/gtk4.vapi -o /usr/share/vala-0.48/vapi/gtk4.vapi
 
 RUN git clone https://github.com/benwaffle/vala-language-server \
@@ -29,12 +29,12 @@ RUN git clone https://github.com/benwaffle/vala-language-server \
 	&& cd .. \
 	&& rm -rf vala-language-server
 
-RUN git clone https://gitlab.gnome.org/exalm/libhandy -b gtk4 \
-	&& cd libhandy \
+RUN git clone https://gitlab.gnome.org/exalm/libadwaita \
+	&& cd libadwaita \
 	&& meson build \
 	&& ninja -C build install \
 	&& cd .. \
-	&& rm -rf libhandy
+	&& rm -rf libadwaita
 
 RUN git clone https://github.com/vala-lang/vala-lint \
 	&& cd vala-lint \
