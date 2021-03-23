@@ -73,6 +73,6 @@ pwgen
 npm
 mesa-dri-drivers
 fuse
-libc++-devel
+libcxx-devel
 cmake
 lldb
