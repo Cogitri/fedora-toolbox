@@ -1,0 +1,44 @@
+diff --git a/Dockerfile b/Dockerfile
+index 38e45ab..f1a7b33 100644
+--- a/Dockerfile
++++ b/Dockerfile
+@@ -13,13 +13,13 @@ RUN printf "Port 2222\nListenAddress localhost\nPermitEmptyPasswords yes\n" >> /
+ 	&& /usr/libexec/openssh/sshd-keygen ecdsa \
+ 	&& /usr/libexec/openssh/sshd-keygen ed25519
+ 
+-RUN curl -L -O https://ftp.acc.umu.se/pub/GNOME/sources/gtk/4.0/gtk-4.0.1.tar.xz \
+-	&& tar xf gtk-4.0.1.tar.xz \
+-	&& cd gtk-4.0.1 \
++RUN curl -L -O https://ftp.acc.umu.se/pub/GNOME/sources/gtk/4.0/gtk-4.0.2.tar.xz \
++	&& tar xf gtk-4.0.2.tar.xz \
++	&& cd gtk-4.0.2 \
+ 	&& meson build --prefix=/usr \
+ 	&& ninja  -C build install \
+ 	&& cd .. \
+-	&& rm -rf gtk-4.0.1 \
++	&& rm -rf gtk-4.0.2 \
+ 	&& sudo curl https://gitlab.gnome.org/GNOME/vala/-/raw/master/vapi/gtk4.vapi -o /usr/share/vala-0.48/vapi/gtk4.vapi
+ 
+ RUN git clone https://github.com/benwaffle/vala-language-server \
+diff --git a/extra-packages b/extra-packages
+index 96f665c..d6e320e 100644
+--- a/extra-packages
++++ b/extra-packages
+@@ -5,6 +5,7 @@ dnf-plugins-core
+ findutils
+ flatpak-spawn
+ fpaste
++patch
+ git
+ gnupg
+ gnupg2-smime
+@@ -73,3 +74,9 @@ pwgen
+ npm
+ mesa-dri-drivers
+ fuse
++openssl-devel
++hugo
++firefox
++gtk3-devel
++perl
++gettext-devel

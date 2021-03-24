@@ -76,3 +76,10 @@ fuse
 libcxx-devel
 cmake
 lldb
+patch
+openssl-devel
+hugo
+firefox
+gtk3-devel
+perl
+gettext-devel
