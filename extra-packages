@@ -72,3 +72,10 @@ gtk4-devel
 python3-pip
 python3-virtualenv
 gedit
+cargo
+clang-devel
+rust
+rust-std-static
+pkgconfig(libudev)
+/usr/bin/rpmbuild
+/usr/bin/pinentry-gnome3
