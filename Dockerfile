@@ -1,7 +1,8 @@
-FROM registry.fedoraproject.org/fedora:34
+FROM registry.fedoraproject.org/fedora-toolbox:34
 
 COPY extra-packages /
 RUN dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+	&& dnf -y upgrade \
 	&& dnf -y install $(<extra-packages)
 RUN rm /extra-packages
 

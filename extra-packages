@@ -79,3 +79,8 @@ rust-std-static
 pkgconfig(libudev)
 /usr/bin/rpmbuild
 /usr/bin/pinentry-gnome3
+gtkmm30-devel
+webkit2gtk3-devel
+libhandy-devel
+jq
+yarnpkg
