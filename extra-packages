@@ -58,3 +58,4 @@ clang-devel
 /usr/bin/pinentry-gnome3
 jq
 yarnpkg
+sassc

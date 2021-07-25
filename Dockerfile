@@ -11,12 +11,13 @@ RUN printf "Port 2222\nListenAddress localhost\nPermitEmptyPasswords yes\n" >> /
 	&& /usr/libexec/openssh/sshd-keygen ecdsa \
 	&& /usr/libexec/openssh/sshd-keygen ed25519
 
-RUN git clone https://gitlab.gnome.org/exalm/libadwaita \
-	&& cd libadwaita \
+RUN curl -O https://gitlab.gnome.org/GNOME/libadwaita/-/archive/1.0.0-alpha.2/libadwaita-1.0.0-alpha.2.tar.gz \
+	&& tar xf libadwaita-1.0.0-alpha.2.tar.gz \
+	&& cd libadwaita-1.0.0-alpha.2 \
 	&& meson build \
 	&& ninja -C build install \
 	&& cd .. \
-	&& rm -rf libadwaita
+	&& rm -rf libadwaita-1.0.0-alpha.2
 
 RUN echo "/usr/local/lib64" > /etc/ld.so.conf.d/custom.conf \
 	&& ldconfig
